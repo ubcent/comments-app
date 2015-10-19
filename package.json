@@ -1,0 +1,25 @@
+{
+  "name": "comments-app",
+  "version": "0.0.0",
+  "description": "An comments application",
+  "main": "app.js",
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ubcent/comments-app.git"
+  },
+  "keywords": [
+    "comments",
+    "nodejs",
+    "angularjs",
+    "mongodb"
+  ],
+  "author": "Dmitry Bondarchuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ubcent/comments-app/issues"
+  },
+  "homepage": "https://github.com/ubcent/comments-app"
+}
