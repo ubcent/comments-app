@@ -1,6 +1,6 @@
 {
   "name": "comments-app",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "An comments application",
   "main": "app.js",
   "scripts": {
@@ -17,9 +17,13 @@
     "mongodb"
   ],
   "author": "Dmitry Bondarchuk",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ubcent/comments-app/issues"
   },
-  "homepage": "https://github.com/ubcent/comments-app"
+  "homepage": "https://github.com/ubcent/comments-app",
+  "dependencies": {
+    "express": "~4.13.3",
+    "mongoose": "~4.1.12"
+  }
 }
