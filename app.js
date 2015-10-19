@@ -11,6 +11,8 @@ app.use(bodyParser.json());
 var mongoose   = require('mongoose');
 mongoose.connect('mongodb://node:node@novus.modulusmongo.net:27017/Iganiq8o');
 
+var Comment = require("./models/comment");
+
 // set port
 var port = process.env.PORT || 8080; 
 
@@ -42,6 +44,38 @@ router.route("/comments").post(function(req, res) {
 
 		res.json(comments);
 	})
+});
+
+router.route("/comments/:comment_id").get(function(req, res) {
+	Comment.findById(req.params.comment_id, function(err, comment) {
+		if(err)
+			res.send(err);
+
+		res.json(comment);
+	});
+}).put(function(req, res) {
+	Comment.findById(req.params.comment_id, function(err, comment) {
+		if(err)
+			res.send(err);
+
+		comment.name = req.body.name;
+
+		comment.save(function(err) {
+			if(err) 
+				res.send(err);
+
+			res.json({ message: "Comment updated!" });
+		});
+	});
+}).delete(function(req, res){
+	Comment.remove({
+		_id: req.params.comment_id
+	}, function(err, bear) {
+		if(err)
+			res.send(err);
+
+		res.json({ message: "Comment deleted!" });
+	});
 });
 
 app.use('/api', router);
