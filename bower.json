@@ -1,0 +1,21 @@
+{
+  "name": "comments-app",
+  "version": "0.0.0",
+  "homepage": "https://github.com/ubcent/comments-app",
+  "authors": [
+    "Dmitry Bondarchuk <dvbondarchuk@gmail.com>"
+  ],
+  "description": "An comments app",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-cookie": "~4.0.9",
+    "angular-resource": "~1.4.7"
+  }
+}
