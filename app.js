@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 var mongoose   = require('mongoose');
-mongoose.connect('mongodb://node:node@novus.modulusmongo.net:27017/Iganiq8o');
+mongoose.connect('mongodb://localhost:27017/Comments');
 
 var Comment = require("./models/comment");
 
@@ -23,19 +23,27 @@ router.use(function(req, res, next) {
 	next();
 });
 
+app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/views'));
+
 router.get('/', function(req, res) {
+	res.sendFile(__dirname + '/views/comments.html');
+});
+
+router.get('/api', function(req, res) {
     res.json({ message: 'hooray! welcome to our api!' });   
 });
 
-router.route("/comments").post(function(req, res) {
+router.route("/api/comments").post(function(req, res) {
 	var comment = new Comment();
 	comment.name = req.body.name;
+	comment.text = req.body.text;
 
 	comment.save(function(err) {
 		if(err)
 			res.send(err);
 
-		res.json({ message: "Comment created!" });
+		res.json({ message: "Comment created!", comment: comment });
 	})
 }).get(function(req, res) {
 	Comment.find(function(err, comments) {
@@ -43,10 +51,10 @@ router.route("/comments").post(function(req, res) {
 			res.send(err);
 
 		res.json(comments);
-	})
+	}).skip(req.query.skip).limit(10);
 });
 
-router.route("/comments/:comment_id").get(function(req, res) {
+router.route("/api/comments/:comment_id").get(function(req, res) {
 	Comment.findById(req.params.comment_id, function(err, comment) {
 		if(err)
 			res.send(err);
@@ -59,6 +67,8 @@ router.route("/comments/:comment_id").get(function(req, res) {
 			res.send(err);
 
 		comment.name = req.body.name;
+		comment.text = req.body.text;
+		comment.likes = req.body.likes;
 
 		comment.save(function(err) {
 			if(err) 
@@ -78,7 +88,7 @@ router.route("/comments/:comment_id").get(function(req, res) {
 	});
 });
 
-app.use('/api', router);
+app.use('/', router);
 app.listen(port, function() {
 	console.log('Server started ' + port);
 });

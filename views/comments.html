@@ -1,0 +1,75 @@
+<html ng-app="commentsApplication">
+    <head>
+        <title>Simple comment box</title>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="css/app.css">
+    </head>
+    <body>
+	    <div class="jumbotron">
+			<div class="container" ng-controller="MainController">
+				<h1>An comment box</h1>
+			    <div class="panel panel-default">
+					<div class="panel-heading">Post your comment</div>
+					<div class="panel-body">
+						<form>
+							<h4>Name</h4>
+							<div class="input-group">
+								<input class="form-control" type="text" ng-model="author" placeholder="John Doe" />
+							</div>
+							<h4>Comment</h4>
+							<div class="input-group">
+								<textarea class="form-control" ng-model="txtcomment" placeholder="Your Comment"></textarea>
+							</div>
+							<div class="input-group" style="text-align:right;">	
+								<button type="button" class="btn btn-primary" ng-click="btn_add();" role="button">Post comment</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="panel panel-default" infinite-scroll="loadMore()" infinite-scroll-distance="0">
+					<div class="panel-heading">Comments</div>
+						<div class="sorting">
+							<ul class="nav nav-pills">
+								<li role="presentation" ng-click="changeSort()" ng-class="{'active':sortType === 'date'}"><a href="#">By date</a></li>
+								<li role="presentation" ng-click="changeSort()" ng-class="{'active':sortType === 'likes'}"><a href="#">By popularity</a></li>
+							</ul>
+						</div>
+						<table class="table table-bordered">
+							<tr>
+								<th>#</th>
+								<th>Author</th>
+								<th>Text</th>
+								<th>Likes</th>
+								<th>Time</th>
+								<th>Actions</th>
+							</tr>
+							<tr ng-repeat="(number, comment) in comments | orderBy:sortType">
+								<td>{{ number+1 }}</td>
+								<td>{{ comment.name }}</td>
+								<td contenteditable="true">{{ comment.text }}</td>
+								<td><span class="badge">{{ comment.likes }}</span></td>
+								<td>{{ comment.date | amCalendar }}</td>
+								<td>
+		                        	<a href="" title="like" ng-click="likeComment($index)"><span class="glyphicon glyphicon-star" aria-hidden="true"></span></a>
+		                        	<a href="" title="dislike" ng-click="dislikeComment($index)"><span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span></a>
+		                        	<a href="" title="remove" ng-click="remItem($index)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+		                        </td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+        <script type="text/javascript" src="js/libs/underscore-min.js"></script>
+        <script type="text/javascript" src="js/libs/angular.min.js"></script>
+        <script type="text/javascript" src="js/libs/angular-resource.min.js"></script>
+        <script type="text/javascript" src="js/libs/moment.min.js"></script>
+        <script type="text/javascript" src="js/libs/angular-moment.min.js"></script>
+        <script type="text/javascript" src="js/libs/ng-infinite-scroll.min.js"></script>
+        <script type="text/javascript" src="js/services/comments.js"></script>
+        <script type="text/javascript" src="js/controllers/MainController.js"></script>
+        <script type="text/javascript" src="js/directives/scroll.js"></script>
+    </body>
+</html>
