@@ -2,6 +2,6 @@
 An comments application
 
 # Installation
-`` npm install
-`` bower install
-`` grunt
+	npm install
+	bower install
+	grunt
