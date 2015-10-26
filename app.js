@@ -34,7 +34,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/api', function(req, res) {
-    res.json({ message: 'hooray! welcome to our api!' });   
+    res.json({ message: 'hey! welcome to our api!' });   
 });
 
 router.route("/api/comments").post(function(req, res) {
