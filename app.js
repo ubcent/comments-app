@@ -24,6 +24,8 @@ router.use(function(req, res, next) {
 	next();
 });
 
+
+// Static path
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/views'));
 
