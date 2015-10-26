@@ -18,7 +18,7 @@
 	        	Post.save({name: $scope.author, text: $scope.txtcomment}, function(data) {
 	        		var obj = angular.fromJson(data);
 	        		$scope.comments.push(obj.comment);
-	        		$scope.txtcomment = "";
+	        		//$scope.txtcomment = "";
 	        	});
 	        }
 	    }
