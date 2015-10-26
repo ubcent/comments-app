@@ -2,6 +2,7 @@
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
+var config = require("./config");
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -9,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 var mongoose   = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/Comments');
+mongoose.connect(config.connection_string);
 
 var Comment = require("./models/comment");
 
