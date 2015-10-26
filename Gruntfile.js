@@ -1,46 +1,23 @@
 module.exports = function(grunt) {
-  grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
+  	grunt.initConfig({
+    	pkg: grunt.file.readJSON('package.json'),
 
-    	concat: {
-			vendor: {
-				src: [
-					'bower_components/angular/angular.min.js',
-					'bower_components/angular-recourse/angular-recourse.min.js'
+    	copy: {
+			main: {
+				files: [
+					{src: 'bower_components/angular/angular.min.js', dest: 'public/js/libs/angular.min.js'},
+					{src: 'bower_components/angular/angular-moment.min.js', dest: 'public/js/libs/angular-moment.min.js'},
+					{src: 'bower_components/angular/angular-resource.min.js', dest: 'public/js/libs/angular-resource.min.js'},
+					{src: 'bower_components/moment/min/moment.min.js', dest: 'public/js/libs/moment.min.js'},
+					{src: 'bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js', dest: 'public/js/libs/ng-infinite-scroll.min.js'},
+					{src: 'bower_components/underscore/underscore.min.js', dest: 'public/js/libs/underscore.min.js'}
 				],
-				dest: 'js/build/vendor.js'
 			},
-			lib: {
-				src: [
-					'js/libs/*.js',
-				],
-				dest: 'js/build/jquery.jsonShedule.js'
-			}
-		},
-    	
-    	uglify: {
-			build: {
-				src: 'js/build/jquery.jsonShedule.js',
-				dest: 'js/build/jquery.jsonShedule.min.js'
-			}
-		},
-
-		sass: {
-			dist: {
-				options: {
-					style: 'compressed'
-				},
-				files: {
-					'css/build/jquery.jsonShedule.css': 'css/*.css'
-				}
-			}
 		}
 
-  });
+	});
 
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-sass');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 
-  grunt.registerTask('default', ['concat', 'uglify', 'sass']);
+	grunt.registerTask('default', ['copy']);
 };
